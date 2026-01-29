@@ -1,0 +1,86 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: #0b0c10;
+  color: rgba(245,245,245,0.9);
+  font-family: "Cormorant Garamond", serif;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 1rem 6vw;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.3em;
+}
+
+header a {
+  margin-right: 1.5rem;
+  text-decoration: none;
+  color: inherit;
+}
+
+#splash {
+  position: fixed;
+  inset: 0;
+  background: #07070a;
+  display: grid;
+  place-items: center;
+  z-index: 10;
+}
+
+.splash-card {
+  text-align: center;
+}
+
+h1 {
+  font-family: "Cinzel", serif;
+  letter-spacing: 0.3em;
+}
+
+#tagline {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.7rem;
+  margin-top: 1rem;
+  opacity: 0.7;
+}
+
+#enter {
+  margin-top: 2rem;
+  background: none;
+  border: 1px solid rgba(255,255,255,0.3);
+  color: inherit;
+  padding: 0.6rem 1.2rem;
+  cursor: pointer;
+}
+
+main {
+  padding: 8rem 6vw;
+}
+
+.project {
+  margin-bottom: 4rem;
+  font-family: "Cinzel", serif;
+  font-size: 1.3rem;
+}
+
+#viewer {
+  position: fixed;
+  inset: 0;
+  background: #07070a;
+  display: grid;
+  place-items: center;
+  z-index: 20;
+}
+
+#viewer img {
+  max-width: 90vw;
+  max-height: 90vh;
+}
+
+/* --- Fix for Safari "black page" / invisible splash text: make splash text explicit --- */
+#splash, #splash * { color: rgba(245,245,245,0.92); }
+.splash-card { background: rgba(255,255,255,0.05); padding: 24px; border-radius: 14px; }
+#enter { background: rgba(255,255,255,0.07); }
