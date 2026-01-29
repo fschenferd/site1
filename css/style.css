@@ -84,3 +84,15 @@ main {
 #splash, #splash * { color: rgba(245,245,245,0.92); }
 .splash-card { background: rgba(255,255,255,0.05); padding: 24px; border-radius: 14px; }
 #enter { background: rgba(255,255,255,0.07); }
+
+/* Ensure splash content is always visible (prevents "black page" look) */
+.splash-card {
+  color: rgba(245,245,245,0.92);
+  background: rgba(255,255,255,0.06);
+  padding: 24px;
+  border-radius: 14px;
+}
+
+#enter {
+  background: rgba(255,255,255,0.08);
+}
