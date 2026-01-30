@@ -101,3 +101,9 @@ main {
 
 #viewer[hidden] { display: none !important; }
 
+
+
+/* DEBUG: tell us which overlay is on top */
+#splash { background: red !important; }
+#viewer { background: blue !important; }
+#splash .splash-card { background: white !important; color: black !important; }
