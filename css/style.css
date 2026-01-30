@@ -1,103 +1,213 @@
+/* Reset */
 * { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { height: 100%; }
+img { display: block; max-width: 100%; }
 
-body {
-  background: #0b0c10;
-  color: rgba(245,245,245,0.9);
-  font-family: "Cormorant Garamond", serif;
+/* Base */
+:root{
+  --bg: #0b0c10;
+  --ink: rgba(245,245,245,0.92);
+  --muted: rgba(245,245,245,0.62);
+  --line: rgba(245,245,245,0.14);
+  --glass: rgba(255,255,255,0.06);
+  --glass2: rgba(255,255,255,0.10);
 }
 
-header {
+body{
+  background: radial-gradient(1200px 800px at 70% 10%, rgba(255,255,255,0.04), transparent 55%),
+              radial-gradient(900px 700px at 10% 90%, rgba(255,255,255,0.03), transparent 60%),
+              var(--bg);
+  color: var(--ink);
+  font-family: "Cormorant Garamond", serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Always respect hidden */
+[hidden] { display: none !important; }
+
+/* Header */
+header{
   position: fixed;
   top: 0;
+  left: 0;
   width: 100%;
-  padding: 1rem 6vw;
+  padding: 18px 6vw;
+  z-index: 5;
+  backdrop-filter: blur(10px);
+  background: linear-gradient(to bottom, rgba(0,0,0,0.55), rgba(0,0,0,0));
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+header nav{
+  display: flex;
+  gap: 22px;
+  align-items: center;
   font-family: "IBM Plex Mono", monospace;
-  font-size: 0.65rem;
-  letter-spacing: 0.3em;
+  font-size: 0.72rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
 }
 
-header a {
-  margin-right: 1.5rem;
+header a{
+  color: var(--muted);
   text-decoration: none;
-  color: inherit;
+  position: relative;
+  padding: 6px 2px;
 }
 
-#splash {
+header a:hover{ color: var(--ink); }
+header a::after{
+  content:"";
+  position:absolute;
+  left:0;
+  bottom:0;
+  height:1px;
+  width:0%;
+  background: var(--ink);
+  transition: width 180ms ease;
+}
+header a:hover::after{ width:100%; }
+
+/* Main layout */
+main{
+  padding: 120px 6vw 80px;
+  max-width: 1100px;
+}
+
+/* Work index as “cinematic cards” */
+.project{
+  margin: 0 0 18px;
+}
+
+.project a{
+  display: block;
+  padding: 26px 22px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+  text-decoration: none;
+  color: var(--ink);
+  transition: transform 180ms ease, background 180ms ease, border-color 180ms ease;
+}
+
+.project a:hover{
+  transform: translateY(-2px);
+  background: linear-gradient(180deg, rgba(255,255,255,0.09), rgba(255,255,255,0.04));
+  border-color: rgba(255,255,255,0.22);
+}
+
+.project a::before{
+  content: "SERIES";
+  display:block;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.22em;
+  color: var(--muted);
+  margin-bottom: 10px;
+}
+
+.project a{
+  font-family: "Cinzel", serif;
+  font-size: clamp(1.1rem, 2.2vw, 1.55rem);
+  letter-spacing: 0.18em;
+}
+
+/* Sections */
+#about, #contact{
+  max-width: 760px;
+  padding: 28px 6vw 0;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+#contact a{
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255,255,255,0.25);
+}
+#contact a:hover{
+  border-bottom-color: rgba(255,255,255,0.6);
+}
+
+/* Splash */
+#splash{
   position: fixed;
   inset: 0;
-  background: #07070a;
   display: grid;
   place-items: center;
   z-index: 10;
+  background: radial-gradient(900px 700px at 50% 35%, rgba(255,255,255,0.06), transparent 60%),
+              #07070a;
 }
 
-.splash-card {
+.splash-card{
+  width: min(680px, 88vw);
+  padding: 34px 28px;
+  border-radius: 22px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.16);
+  box-shadow: 0 18px 60px rgba(0,0,0,0.55);
   text-align: center;
 }
 
-h1 {
+h1{
   font-family: "Cinzel", serif;
-  letter-spacing: 0.3em;
+  letter-spacing: 0.34em;
+  font-weight: 500;
+  font-size: clamp(1.3rem, 3.5vw, 2.1rem);
 }
 
-#tagline {
+#tagline{
+  margin-top: 14px;
   font-family: "IBM Plex Mono", monospace;
-  font-size: 0.7rem;
-  margin-top: 1rem;
-  opacity: 0.7;
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  color: var(--muted);
 }
 
-#enter {
-  margin-top: 2rem;
-  background: none;
-  border: 1px solid rgba(255,255,255,0.3);
-  color: inherit;
-  padding: 0.6rem 1.2rem;
+#enter{
+  margin-top: 22px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.22);
+  color: var(--ink);
+  padding: 10px 16px;
+  border-radius: 999px;
   cursor: pointer;
+  font-family: "IBM Plex Mono", monospace;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-size: 0.72rem;
+}
+#enter:hover{
+  background: rgba(255,255,255,0.12);
+  border-color: rgba(255,255,255,0.32);
 }
 
-main {
-  padding: 8rem 6vw;
-}
-
-.project {
-  margin-bottom: 4rem;
-  font-family: "Cinzel", serif;
-  font-size: 1.3rem;
-}
-
-#viewer {
+/* Viewer */
+#viewer{
   position: fixed;
   inset: 0;
-  background: #07070a;
+  z-index: 20;
+  background: rgba(7,7,10,0.92);
+  backdrop-filter: blur(10px);
   display: grid;
   place-items: center;
-  z-index: 20;
-}
-
-#viewer img {
-  max-width: 90vw;
-  max-height: 90vh;
-}
-
-/* --- Fix for Safari "black page" / invisible splash text: make splash text explicit --- */
-#splash, #splash * { color: rgba(245,245,245,0.92); }
-.splash-card { background: rgba(255,255,255,0.05); padding: 24px; border-radius: 14px; }
-#enter { background: rgba(255,255,255,0.07); }
-
-/* Ensure splash content is always visible (prevents "black page" look) */
-.splash-card {
-  color: rgba(245,245,245,0.92);
-  background: rgba(255,255,255,0.06);
   padding: 24px;
+}
+
+#viewer img{
+  max-width: min(92vw, 1200px);
+  max-height: 82vh;
   border-radius: 14px;
+  box-shadow: 0 18px 70px rgba(0,0,0,0.7);
 }
 
-#enter {
-  background: rgba(255,255,255,0.08);
+#counter{
+  margin-top: 12px;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  color: var(--muted);
+  text-transform: uppercase;
 }
-
-#splash, #splash * { color: rgba(245,245,245,0.92) !important; }
-
-#viewer[hidden] { display: none !important; }
-
