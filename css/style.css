@@ -291,3 +291,16 @@ h1{
 
 /* Optional: make About/Contact not start under the strip */
 #about, #contact{ padding-top: 10px; }
+
+#about {
+  max-width: 760px;
+  margin-top: 90px;
+}
+
+.about-lang {
+  margin-bottom: 64px;
+}
+
+#about p {
+  margin-bottom: 1.4em;
+}
