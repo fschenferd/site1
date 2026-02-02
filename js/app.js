@@ -18,6 +18,14 @@ document.addEventListener("DOMContentLoaded", () => {
   if (enterBtn && splash) {
     enterBtn.onclick = () => splash.remove();
   }
+  
+ if (window.location.hash && splash) {
+    splash.remove();
+    const target = document.querySelector(window.location.hash);
+    if (target) {
+      target.scrollIntoView({ behavior: "smooth" });
+    }
+  }
 
   /* -----------------------------
      Work titles (from folder names)
