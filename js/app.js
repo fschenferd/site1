@@ -126,3 +126,32 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 });
+
+  /* ---------------- About: Portuguese reveal (persist) ---------------- */
+
+  const ptReveal = document.getElementById("pt-reveal");
+  const aboutPt = document.getElementById("about-pt");
+  const PT_KEY = "about_pt_open";
+
+  function openPortuguese() {
+    if (!aboutPt || !ptReveal) return;
+    aboutPt.hidden = false;
+    ptReveal.setAttribute("aria-expanded", "true");
+    localStorage.setItem(PT_KEY, "1");
+  }
+
+  // Restore persisted state
+  try {
+    if (localStorage.getItem(PT_KEY) === "1") {
+      openPortuguese();
+    }
+  } catch (_) {
+    // ignore storage errors (privacy mode, etc.)
+  }
+
+  if (ptReveal && aboutPt) {
+    ptReveal.addEventListener("click", () => {
+      if (!aboutPt.hidden) return; // no toggle, just reveal
+      openPortuguese();
+    });
+  }
