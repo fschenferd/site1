@@ -120,59 +120,45 @@ main{
   border-bottom-color: rgba(255,255,255,0.6);
 }
 
-/* Splash */
+/* Splash – strict */
+
 #splash{
   position: fixed;
   inset: 0;
+  z-index: 10;
+  background: #07070a;
   display: grid;
   place-items: center;
-  z-index: 10;
-  background: radial-gradient(900px 700px at 50% 35%, rgba(255,255,255,0.06), transparent 60%),
-              #07070a;
 }
 
-.splash-card{
-  width: min(680px, 88vw);
-  padding: 34px 28px;
-  border-radius: 22px;
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.16);
-  box-shadow: 0 18px 60px rgba(0,0,0,0.55);
+.splash-inner{
   text-align: center;
 }
 
-h1{
-  font-family: "Cinzel", serif;
-  letter-spacing: 0.34em;
+#splash h1{
+  font-family: "Cormorant Garamond", serif;
   font-weight: 500;
-  font-size: clamp(1.3rem, 3.5vw, 2.1rem);
+  font-size: clamp(1.4rem, 3.6vw, 2.2rem);
+  letter-spacing: 0.32em;
+  margin-bottom: 18px;
 }
 
-#tagline{
-  margin-top: 14px;
-  font-family: "IBM Plex Mono", monospace;
-  font-size: 0.78rem;
-  letter-spacing: 0.18em;
-  color: var(--muted);
+.splash-tagline{
+  font-family: "Cormorant Garamond", serif;
+  font-size: 0.95rem;
+  letter-spacing: 0.08em;
+  color: rgba(245,245,245,0.7);
+  margin-bottom: 42px;
 }
 
-#enter{
-  margin-top: 22px;
-  background: rgba(255,255,255,0.08);
-  border: 1px solid rgba(255,255,255,0.22);
-  color: var(--ink);
-  padding: 10px 16px;
-  border-radius: 999px;
-  cursor: pointer;
-  font-family: "IBM Plex Mono", monospace;
-  letter-spacing: 0.18em;
+.splash-enter{
+  font-family: "Cormorant Garamond", serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
-  font-size: 0.72rem;
+  color: rgba(245,245,245,0.45);
 }
-#enter:hover{
-  background: rgba(255,255,255,0.12);
-  border-color: rgba(255,255,255,0.32);
-}
+
 
 /* Viewer */
 #viewer{
