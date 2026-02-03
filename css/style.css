@@ -278,6 +278,15 @@ header nav button:hover {
   text-transform: uppercase;
 }
 
+/* Mobile gesture reliability in viewer */
+#viewer-content,
+#viewer-img {
+  touch-action: none;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+
 /* =========================================================
    ABOUT / CONTACT (VERTICAL PAGE)
 ========================================================= */
@@ -345,8 +354,4 @@ header nav button:hover {
   color: rgba(245,245,245,0.85);
 }
 
-/* Ensure gestures are captured on mobile */
-#viewer-content, #viewer-img {
-  touch-action: none;
-}
 
