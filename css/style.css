@@ -129,6 +129,9 @@ main{
   background: #07070a;
   display: grid;
   place-items: center;
+
+  opacity: 0;
+  animation: splashIn 1200ms ease forwards;
 }
 
 .splash-inner{
@@ -157,6 +160,10 @@ main{
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: rgba(245,245,245,0.45);
+}
+
+@keyframes splashIn{
+  to { opacity: 1; }
 }
 
 
