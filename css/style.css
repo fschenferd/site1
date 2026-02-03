@@ -344,3 +344,9 @@ header nav button:hover {
 #pt-reveal:hover {
   color: rgba(245,245,245,0.85);
 }
+
+/* Ensure gestures are captured on mobile */
+#viewer-content, #viewer-img {
+  touch-action: none;
+}
+
