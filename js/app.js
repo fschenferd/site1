@@ -8,37 +8,33 @@ document.addEventListener("DOMContentLoaded", () => {
     return slug.replace(/-/g, " ").toUpperCase();
   }
 
-  /* -----------------------------
-     Splash
-  ----------------------------- */
+/* -----------------------------
+   Splash
+----------------------------- */
+
 const splash = document.getElementById("splash");
 const enterBtn = document.getElementById("enter");
 
-if (enterBtn && splash) {
-  enterBtn.onclick = () => splash.remove();
+function dismissSplash() {
+  if (!splash) return;
+  splash.remove();
 }
 
+if (enterBtn && splash) {
+  enterBtn.addEventListener("click", dismissSplash);
+}
+
+window.addEventListener("keydown", dismissSplash, { once: true });
+
+// If opening with a hash, skip splash and jump.
 if (window.location.hash && splash) {
-  splash.remove();
+  dismissSplash();
 
   setTimeout(() => {
     const target = document.querySelector(window.location.hash);
     if (target) {
-      window.scrollTo({
-        top: target.offsetTop - 80,
-        behavior: "auto"
-      });
+      window.scrollTo({ top: target.offsetTop - 80, behavior: "auto" });
     }
-  }, 0);
-}
-
-
-// keep your hash behavior
-if (window.location.hash && splash) {
-  dismissSplash();
-  setTimeout(() => {
-    const target = document.querySelector(window.location.hash);
-    if (target) window.scrollTo({ top: target.offsetTop - 80, behavior: "auto" });
   }, 0);
 }
 
