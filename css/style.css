@@ -132,7 +132,9 @@ main{
 
   opacity: 0;
   animation: splashIn 1200ms ease forwards;
+  transition: opacity 600ms ease;
 }
+
 
 .splash-inner{
   text-align: center;
