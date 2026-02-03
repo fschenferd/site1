@@ -21,6 +21,10 @@ function dismissSplash() {
 
 if (enterBtn && splash) {
   enterBtn.addEventListener("click", dismissSplash);
+  
+}
+  
+window.addEventListener("keydown", dismissSplash, { once: true });
 }
 
 
