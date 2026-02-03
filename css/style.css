@@ -286,8 +286,13 @@ header nav button:hover {
 #contact {
   max-width: 760px;
   padding: 120px 6vw 0;
-  line-height: 1.6;
   color: var(--muted);
+}
+
+/* About: larger, calmer reading */
+#about {
+  font-size: 1.15rem;
+  line-height: 1.8;
 }
 
 .about-lang {
@@ -296,6 +301,11 @@ header nav button:hover {
 
 #about p {
   margin-bottom: 1.4em;
+}
+
+/* Contact stays tighter */
+#contact {
+  line-height: 1.6;
 }
 
 #contact a {
@@ -328,9 +338,8 @@ header nav button:hover {
   color: rgba(245,245,245,0.80);
 }
 
-/* Portuguese block: slightly quieter */
+/* Portuguese block: slightly quieter but still readable */
 .about-secondary {
   color: rgba(245,245,245,0.56);
-  font-size: 0.98em;
+  font-size: 1.05em;
 }
-
