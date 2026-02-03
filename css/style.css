@@ -307,3 +307,30 @@ header nav button:hover {
 #contact a:hover {
   border-bottom-color: rgba(255,255,255,0.6);
 }
+
+/* About: Portuguese reveal (quiet footnote) */
+#pt-reveal {
+  margin-top: 22px;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+
+  color: rgba(245,245,245,0.55);
+}
+
+#pt-reveal:hover {
+  color: rgba(245,245,245,0.80);
+}
+
+/* Portuguese block: slightly quieter */
+.about-secondary {
+  color: rgba(245,245,245,0.56);
+  font-size: 0.98em;
+}
+
