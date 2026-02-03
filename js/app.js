@@ -127,6 +127,58 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 
+/* ---------------- Viewer: mobile tap advance ---------------- */
+
+viewerImg.addEventListener("click", (e) => {
+  if (state !== "viewer") return;
+
+  // advance to next image
+  if (currentIndex < projects[activeProject]) {
+    currentIndex += 1;
+    renderImage();
+  } else {
+    closeViewer();
+  }
+});
+
+/* ---------------- Viewer: swipe navigation ---------------- */
+
+let touchStartX = 0;
+let touchEndX = 0;
+
+viewerImg.addEventListener("touchstart", (e) => {
+  if (state !== "viewer") return;
+  touchStartX = e.changedTouches[0].screenX;
+}, { passive: true });
+
+viewerImg.addEventListener("touchend", (e) => {
+  if (state !== "viewer") return;
+  touchEndX = e.changedTouches[0].screenX;
+  handleSwipe();
+}, { passive: true });
+
+function handleSwipe() {
+  const delta = touchEndX - touchStartX;
+
+  // minimum swipe distance (avoid accidental taps)
+  if (Math.abs(delta) < 40) return;
+
+  if (delta < 0) {
+    // swipe left → next
+    if (currentIndex < projects[activeProject]) {
+      currentIndex += 1;
+      renderImage();
+    }
+  } else {
+    // swipe right → previous
+    if (currentIndex > 1) {
+      currentIndex -= 1;
+      renderImage();
+    }
+  }
+}
+
+
   /* ---------------- About: Portuguese reveal (persist) ---------------- */
 
   const ptReveal = document.getElementById("pt-reveal");
