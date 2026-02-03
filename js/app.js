@@ -185,24 +185,28 @@ if (viewerContent) {
     e.preventDefault();
   }, { passive: false });
 
-  viewerContent.addEventListener("touchend", (e) => {
-    if (state !== "viewer") return;
+viewerContent.addEventListener("touchend", (e) => {
+  if (state !== "viewer") return;
 
-    const dx = lastX - startX;
-    const dy = lastY - startY;
+  const dx = lastX - startX;
+  const dy = lastY - startY;
 
-    // Tap = next
-    if (!moved) {
-      nextImage();
-      return;
-    }
+  const TAP_MAX = 14;   // px (tolerate jitter)
+  const SWIPE_MIN = 35; // px (intentional swipe)
 
-    // Horizontal swipe only (ignore mostly-vertical moves)
-    if (Math.abs(dx) < SWIPE_MIN || Math.abs(dx) < Math.abs(dy)) return;
+  // Tap (or near-tap) = next
+  if (Math.abs(dx) <= TAP_MAX && Math.abs(dy) <= TAP_MAX) {
+    nextImage();
+    return;
+  }
 
-    if (dx < 0) nextImage();  // swipe left
-    else prevImage();         // swipe right
-  }, { passive: true });
+  // Horizontal swipe only (ignore mostly-vertical)
+  if (Math.abs(dx) < SWIPE_MIN || Math.abs(dx) < Math.abs(dy)) return;
+
+  if (dx < 0) nextImage();  // swipe left
+  else prevImage();         // swipe right
+}, { passive: true });
+
 
   // Kill “ghost click” after touch on some mobile browsers
   viewerContent.addEventListener("click", (e) => {
