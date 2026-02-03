@@ -25,7 +25,7 @@ body{
 
 /* Always respect hidden */
 [hidden] { display: none !important; }
-
+ 
 /* Header */
 header{
   position: fixed;
