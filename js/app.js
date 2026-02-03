@@ -127,19 +127,79 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 
-/* ---------------- Viewer: mobile tap advance ---------------- */
+/* ---------------- Viewer: mobile tap + swipe (robust) ---------------- */
 
-viewerImg.addEventListener("click", (e) => {
-  if (state !== "viewer") return;
+const viewerContent = document.getElementById("viewer-content");
 
-  // advance to next image
+let downX = 0;
+let downY = 0;
+let lastX = 0;
+let moved = false;
+const SWIPE_MIN = 35;     // px
+const MOVE_TOL = 8;       // px
+
+function nextImage() {
   if (currentIndex < projects[activeProject]) {
     currentIndex += 1;
     renderImage();
   } else {
     closeViewer();
   }
-});
+}
+
+function prevImage() {
+  if (currentIndex > 1) {
+    currentIndex -= 1;
+    renderImage();
+  }
+}
+
+if (viewerContent) {
+  // Pointer Events cover most modern mobile browsers (incl. iOS 13+)
+  viewerContent.addEventListener("pointerdown", (e) => {
+    if (state !== "viewer") return;
+    downX = lastX = e.clientX;
+    downY = e.clientY;
+    moved = false;
+    viewerContent.setPointerCapture?.(e.pointerId);
+  });
+
+  viewerContent.addEventListener("pointermove", (e) => {
+    if (state !== "viewer") return;
+    const dx = e.clientX - downX;
+    const dy = e.clientY - downY;
+
+    if (Math.abs(dx) > MOVE_TOL || Math.abs(dy) > MOVE_TOL) moved = true;
+    lastX = e.clientX;
+  });
+
+  viewerContent.addEventListener("pointerup", (e) => {
+    if (state !== "viewer") return;
+
+    const dx = lastX - downX;
+    const dy = e.clientY - downY;
+
+    // If it was essentially a tap: advance
+    if (!moved) {
+      nextImage();
+      return;
+    }
+
+    // Horizontal swipe only (ignore mostly-vertical moves)
+    if (Math.abs(dx) < SWIPE_MIN || Math.abs(dx) < Math.abs(dy)) return;
+
+    if (dx < 0) nextImage();  // swipe left
+    else prevImage();         // swipe right
+  });
+
+  // Prevent ghost clicks / browser gesture interference
+  viewerContent.addEventListener("click", (e) => {
+    if (state !== "viewer") return;
+    e.preventDefault();
+    e.stopPropagation();
+  });
+}
+
 
 /* ---------------- Viewer: swipe navigation ---------------- */
 
