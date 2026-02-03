@@ -15,13 +15,18 @@ const splash = document.getElementById("splash");
 
 function dismissSplash(){
   if (!splash) return;
+
+  splash.style.animation = "none"; // stop CSS animation
   splash.style.opacity = "0";
-  splash.style.transition = "opacity 600ms ease";
-  setTimeout(() => splash.remove(), 600);
+
+  setTimeout(() => {
+    splash.remove();
+  }, 600);
 }
 
 window.addEventListener("keydown", dismissSplash, { once: true });
 window.addEventListener("click", dismissSplash, { once: true });
+
 
 
   // force vertical scroll after splash removal
