@@ -12,20 +12,33 @@ document.addEventListener("DOMContentLoaded", () => {
      Splash
   ----------------------------- */
 const splash = document.getElementById("splash");
+const enterBtn = document.getElementById("enter");
 
 function dismissSplash(){
   if (!splash) return;
-
-  splash.style.animation = "none"; // stop CSS animation
-  splash.style.opacity = "0";
-
-  setTimeout(() => {
-    splash.remove();
-  }, 600);
+  splash.remove();
 }
 
+if (enterBtn && splash) {
+  enterBtn.addEventListener("click", dismissSplash);
+}
+
+// optional fallback: click anywhere or any key
+window.addEventListener("click", (e) => {
+  if (!splash) return;
+  if (e.target.closest("#splash")) dismissSplash();
+}, { once: true });
+
 window.addEventListener("keydown", dismissSplash, { once: true });
-window.addEventListener("click", dismissSplash, { once: true });
+
+// keep your hash behavior
+if (window.location.hash && splash) {
+  dismissSplash();
+  setTimeout(() => {
+    const target = document.querySelector(window.location.hash);
+    if (target) window.scrollTo({ top: target.offsetTop - 80, behavior: "auto" });
+  }, 0);
+}
 
 
 
