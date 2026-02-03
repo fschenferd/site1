@@ -11,16 +11,18 @@ document.addEventListener("DOMContentLoaded", () => {
   /* -----------------------------
      Splash
   ----------------------------- */
+const splash = document.getElementById("splash");
 
-  const splash = document.getElementById("splash");
-  const enterBtn = document.getElementById("enter");
+function dismissSplash(){
+  if (!splash) return;
+  splash.style.opacity = "0";
+  splash.style.transition = "opacity 600ms ease";
+  setTimeout(() => splash.remove(), 600);
+}
 
-  if (enterBtn && splash) {
-    enterBtn.onclick = () => splash.remove();
-  }
-  
-if (window.location.hash && splash) {
-  splash.remove();
+window.addEventListener("keydown", dismissSplash, { once: true });
+window.addEventListener("click", dismissSplash, { once: true });
+
 
   // force vertical scroll after splash removal
   setTimeout(() => {
