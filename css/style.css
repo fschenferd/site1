@@ -129,6 +129,7 @@ main{
   background: #07070a;
   display: grid;
   place-items: center;
+}
 
   opacity: 0;
   animation: splashIn 1200ms ease forwards;
@@ -156,17 +157,21 @@ main{
   margin-bottom: 48px;
 }
 
-.splash-enter{
+#enter{
+  margin-top: 40px;
+  background: none;
+  border: 1px solid rgba(245,245,245,0.22);
+  color: rgba(245,245,245,0.78);
+  padding: 10px 16px;
+  border-radius: 999px;
+  cursor: pointer;
   font-family: "Cormorant Garamond", serif;
-  font-size: 0.75rem;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: rgba(245,245,245,0.45);
+  font-size: 0.75rem;
 }
 
-@keyframes splashIn{
-  to { opacity: 1; }
-}
+
 
 
 /* Viewer */
