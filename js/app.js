@@ -16,7 +16,6 @@ const splash = document.getElementById("splash");
 const enterBtn = document.getElementById("enter");
 
 function dismissSplash() {
-  if (!splash) return;
   splash.remove();
 }
 
@@ -24,7 +23,6 @@ if (enterBtn && splash) {
   enterBtn.addEventListener("click", dismissSplash);
 }
 
-window.addEventListener("keydown", dismissSplash, { once: true });
 
 // If opening with a hash, skip splash and jump.
 if (window.location.hash && splash) {
