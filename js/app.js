@@ -127,16 +127,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 
-/* ---------------- Viewer: mobile tap + swipe (robust) ---------------- */
+/* ---------------- Viewer: mobile tap + swipe (iOS/Android) ---------------- */
 
 const viewerContent = document.getElementById("viewer-content");
-
-let downX = 0;
-let downY = 0;
-let lastX = 0;
-let moved = false;
-const SWIPE_MIN = 35;     // px
-const MOVE_TOL = 8;       // px
 
 function nextImage() {
   if (currentIndex < projects[activeProject]) {
@@ -155,31 +148,50 @@ function prevImage() {
 }
 
 if (viewerContent) {
-  // Pointer Events cover most modern mobile browsers (incl. iOS 13+)
-  viewerContent.addEventListener("pointerdown", (e) => {
-    if (state !== "viewer") return;
-    downX = lastX = e.clientX;
-    downY = e.clientY;
-    moved = false;
-    viewerContent.setPointerCapture?.(e.pointerId);
-  });
+  let startX = 0;
+  let startY = 0;
+  let lastX = 0;
+  let lastY = 0;
+  let moved = false;
 
-  viewerContent.addEventListener("pointermove", (e) => {
+  const SWIPE_MIN = 35; // px
+  const MOVE_TOL = 8;   // px
+
+  // --- Touch fallback (works everywhere) ---
+  viewerContent.addEventListener("touchstart", (e) => {
     if (state !== "viewer") return;
-    const dx = e.clientX - downX;
-    const dy = e.clientY - downY;
+    if (e.touches.length !== 1) return;
+
+    const t = e.touches[0];
+    startX = lastX = t.clientX;
+    startY = lastY = t.clientY;
+    moved = false;
+  }, { passive: true });
+
+  viewerContent.addEventListener("touchmove", (e) => {
+    if (state !== "viewer") return;
+    if (e.touches.length !== 1) return;
+
+    const t = e.touches[0];
+    lastX = t.clientX;
+    lastY = t.clientY;
+
+    const dx = lastX - startX;
+    const dy = lastY - startY;
 
     if (Math.abs(dx) > MOVE_TOL || Math.abs(dy) > MOVE_TOL) moved = true;
-    lastX = e.clientX;
-  });
 
-  viewerContent.addEventListener("pointerup", (e) => {
+    // Prevent the browser from treating this as page scroll / navigation gesture
+    e.preventDefault();
+  }, { passive: false });
+
+  viewerContent.addEventListener("touchend", (e) => {
     if (state !== "viewer") return;
 
-    const dx = lastX - downX;
-    const dy = e.clientY - downY;
+    const dx = lastX - startX;
+    const dy = lastY - startY;
 
-    // If it was essentially a tap: advance
+    // Tap = next
     if (!moved) {
       nextImage();
       return;
@@ -190,9 +202,9 @@ if (viewerContent) {
 
     if (dx < 0) nextImage();  // swipe left
     else prevImage();         // swipe right
-  });
+  }, { passive: true });
 
-  // Prevent ghost clicks / browser gesture interference
+  // Kill “ghost click” after touch on some mobile browsers
   viewerContent.addEventListener("click", (e) => {
     if (state !== "viewer") return;
     e.preventDefault();
@@ -200,43 +212,6 @@ if (viewerContent) {
   });
 }
 
-
-/* ---------------- Viewer: swipe navigation ---------------- */
-
-let touchStartX = 0;
-let touchEndX = 0;
-
-viewerImg.addEventListener("touchstart", (e) => {
-  if (state !== "viewer") return;
-  touchStartX = e.changedTouches[0].screenX;
-}, { passive: true });
-
-viewerImg.addEventListener("touchend", (e) => {
-  if (state !== "viewer") return;
-  touchEndX = e.changedTouches[0].screenX;
-  handleSwipe();
-}, { passive: true });
-
-function handleSwipe() {
-  const delta = touchEndX - touchStartX;
-
-  // minimum swipe distance (avoid accidental taps)
-  if (Math.abs(delta) < 40) return;
-
-  if (delta < 0) {
-    // swipe left → next
-    if (currentIndex < projects[activeProject]) {
-      currentIndex += 1;
-      renderImage();
-    }
-  } else {
-    // swipe right → previous
-    if (currentIndex > 1) {
-      currentIndex -= 1;
-      renderImage();
-    }
-  }
-}
 
 
   /* ---------------- About: Portuguese reveal (persist) ---------------- */
