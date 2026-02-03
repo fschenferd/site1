@@ -1,218 +1,189 @@
-/* Reset */
-* { margin: 0; padding: 0; box-sizing: border-box; }
-html, body { height: 100%; }
-img { display: block; max-width: 100%; }
+/* =========================================================
+   RESET
+========================================================= */
 
-/* Base */
-:root{
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+/* =========================================================
+   VARIABLES
+========================================================= */
+
+:root {
   --bg: #0b0c10;
   --ink: rgba(245,245,245,0.92);
   --muted: rgba(245,245,245,0.62);
   --line: rgba(245,245,245,0.14);
   --glass: rgba(255,255,255,0.06);
-  --glass2: rgba(255,255,255,0.10);
+  --glass-strong: rgba(255,255,255,0.10);
 }
 
-body{
-  background: radial-gradient(1200px 800px at 70% 10%, rgba(255,255,255,0.04), transparent 55%),
-              radial-gradient(900px 700px at 10% 90%, rgba(255,255,255,0.03), transparent 60%),
-              var(--bg);
+/* =========================================================
+   BASE
+========================================================= */
+
+body {
+  background:
+    radial-gradient(1200px 800px at 70% 10%, rgba(255,255,255,0.04), transparent 55%),
+    radial-gradient(900px 700px at 10% 90%, rgba(255,255,255,0.03), transparent 60%),
+    var(--bg);
   color: var(--ink);
   font-family: "Cormorant Garamond", serif;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  overflow-y: auto;
 }
 
-/* Always respect hidden */
-[hidden] { display: none !important; }
- 
-/* Header */
-header{
+body.locked {
+  overflow: hidden;
+}
+
+/* =========================================================
+   HEADER / NAV
+========================================================= */
+
+header {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   padding: 18px 6vw;
-  z-index: 5;
+  z-index: 20;
   backdrop-filter: blur(10px);
-  background: linear-gradient(to bottom, rgba(0,0,0,0.55), rgba(0,0,0,0));
+  background: linear-gradient(
+    to bottom,
+    rgba(0,0,0,0.55),
+    rgba(0,0,0,0)
+  );
   border-bottom: 1px solid rgba(255,255,255,0.06);
 }
 
-header nav{
+header nav {
   display: flex;
   gap: 22px;
   align-items: center;
+}
+
+header nav button {
+  background: none;
+  border: none;
+  padding: 6px 2px;
+  cursor: pointer;
+  color: var(--muted);
   font-family: "IBM Plex Mono", monospace;
   font-size: 0.72rem;
   letter-spacing: 0.24em;
   text-transform: uppercase;
 }
 
-header a{
-  color: var(--muted);
-  text-decoration: none;
-  position: relative;
-  padding: 6px 2px;
-}
-
-header a:hover{ color: var(--ink); }
-header a::after{
-  content:"";
-  position:absolute;
-  left:0;
-  bottom:0;
-  height:1px;
-  width:0%;
-  background: var(--ink);
-  transition: width 180ms ease;
-}
-header a:hover::after{ width:100%; }
-
-/* Main layout */
-main{
-  padding: 120px 6vw 80px;
-  max-width: 1100px;
-}
-
-/* Work index as “cinematic cards” */
-.project{
-  margin: 0 0 18px;
-}
-
-.project a{
-  display: block;
-  padding: 26px 22px;
-  border: 1px solid var(--line);
-  border-radius: 18px;
-  background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
-  text-decoration: none;
+header nav button:hover {
   color: var(--ink);
-  transition: transform 180ms ease, background 180ms ease, border-color 180ms ease;
 }
 
-.project a:hover{
-  transform: translateY(-2px);
-  background: linear-gradient(180deg, rgba(255,255,255,0.09), rgba(255,255,255,0.04));
-  border-color: rgba(255,255,255,0.22);
+/* =========================================================
+   SPLASH
+========================================================= */
+
+#splash {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(900px 700px at 50% 35%, rgba(255,255,255,0.06), transparent 60%),
+    #07070a;
 }
 
-.project a{
-  font-family: "Cinzel", serif;
-  font-size: clamp(1.1rem, 2.2vw, 1.55rem);
-  letter-spacing: 0.18em;
-}
-
-/* Sections */
-#about, #contact{
-  max-width: 760px;
-  padding: 28px 6vw 0;
-  color: var(--muted);
-  line-height: 1.6;
-}
-
-#contact a{
-  color: var(--ink);
-  text-decoration: none;
-  border-bottom: 1px solid rgba(255,255,255,0.25);
-}
-#contact a:hover{
-  border-bottom-color: rgba(255,255,255,0.6);
-}
-
-/* Splash */
-/* Splash: minor design adjustments only */
-#splash{
-  background: #07070a; /* flat black */
-}
-
-.splash-card{
-  background: transparent;
-  border: 0;
-  box-shadow: none;
-  width: min(720px, 90vw);
-  padding: 42px 22px;
+.splash-card {
+  width: min(680px, 88vw);
+  padding: 34px 28px;
+  border-radius: 22px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.16);
+  box-shadow: 0 18px 60px rgba(0,0,0,0.55);
   text-align: center;
 }
 
-.splash-card h1{
-  letter-spacing: 0.30em;
+.splash-card h1 {
+  font-family: "Cinzel", serif;
+  font-weight: 500;
+  font-size: clamp(1.3rem, 3.5vw, 2.1rem);
+  letter-spacing: 0.34em;
 }
 
-#tagline{
-  margin-top: 16px;
-  font-size: 0.95rem;
-  letter-spacing: 0.12em;
-  color: rgba(245,245,245,0.70);
+#tagline {
+  margin-top: 14px;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  color: var(--muted);
 }
 
-#enter{
-  margin-top: 34px;
-  background: none;
-  border: 1px solid rgba(245,245,245,0.22);
-  color: rgba(245,245,245,0.82);
-  padding: 10px 18px;
+#enter {
+  margin-top: 22px;
+  padding: 10px 16px;
   border-radius: 999px;
-}
-#enter:hover{
-  background: none;
-  border-color: rgba(245,245,245,0.38);
-}
-
-
-/* Viewer */
-#viewer{
-  position: fixed;
-  inset: 0;
-  z-index: 20;
-  background: rgba(7,7,10,0.92);
-  backdrop-filter: blur(10px);
-  display: grid;
-  place-items: center;
-  padding: 24px;
-}
-
-#viewer img{
-  max-width: min(92vw, 1200px);
-  max-height: 82vh;
-  border-radius: 14px;
-  box-shadow: 0 18px 70px rgba(0,0,0,0.7);
-}
-
-#counter{
-  margin-top: 12px;
+  cursor: pointer;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.22);
+  color: var(--ink);
   font-family: "IBM Plex Mono", monospace;
   font-size: 0.72rem;
   letter-spacing: 0.18em;
-  color: var(--muted);
   text-transform: uppercase;
 }
 
-/* Work strip: horizontal snap */
-.work-strip{
-  padding: 120px 6vw 70px;
+#enter:hover {
+  background: rgba(255,255,255,0.12);
+  border-color: rgba(255,255,255,0.32);
+}
+
+/* =========================================================
+   WORK PLANE (HORIZONTAL)
+========================================================= */
+
+.work-strip {
   display: flex;
   gap: 5vw;
+  padding: 120px 6vw 80px;
   overflow-x: auto;
   overflow-y: hidden;
   scroll-snap-type: x mandatory;
   scroll-padding: 6vw;
-  -webkit-overflow-scrolling: touch;
-  max-width: none;
+  scrollbar-width: none;
 }
 
-/* Hide scrollbar (optional but cleaner) */
-.work-strip::-webkit-scrollbar { height: 0px; }
-.work-strip { scrollbar-width: none; }
+.work-strip::-webkit-scrollbar {
+  display: none;
+}
 
-.project{
+.project {
   flex: 0 0 auto;
   scroll-snap-align: center;
-  margin: 0;
 }
 
-/* Card layout: image-first, cinematic framing */
-.card{
+/* =========================================================
+   PROJECT CARD
+========================================================= */
+
+.card {
   width: min(78vw, 980px);
   height: min(64vh, 620px);
   display: grid;
@@ -223,63 +194,100 @@ main{
   overflow: hidden;
   text-decoration: none;
   color: inherit;
-  transform: translateZ(0);
-  transition: transform 220ms ease, border-color 220ms ease, background 220ms ease;
+  transition:
+    border-color 220ms ease,
+    background 220ms ease,
+    transform 220ms ease;
 }
 
-.card:hover{
+.card:hover {
   border-color: rgba(255,255,255,0.26);
   background: rgba(255,255,255,0.07);
   transform: translateY(-2px);
 }
 
-/* Image area */
-.card-media{
+.card-media {
   position: relative;
   overflow: hidden;
 }
 
-.card-media img{
+.card-media img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   transform: scale(1.03);
-  transition: transform 260ms ease;
   will-change: transform;
 }
 
-/* Subtle hover drift (CSS-only baseline) */
-.card:hover .card-media img{
-  transform: scale(1.06);
-}
-
-/* Meta */
-.card-meta{
+.card-meta {
   padding: 16px 18px 18px;
-  background: linear-gradient(to top, rgba(0,0,0,0.55), rgba(0,0,0,0));
+  background: linear-gradient(
+    to top,
+    rgba(0,0,0,0.55),
+    rgba(0,0,0,0)
+  );
 }
 
-.card-kicker{
-  font-family: "IBM Plex Mono", monospace;
-  font-size: 0.70rem;
-  letter-spacing: 0.22em;
-  color: rgba(245,245,245,0.62);
-  text-transform: uppercase;
-  margin-bottom: 6px;
-}
-
-.card-title{
+.card-title {
   font-family: "Cinzel", serif;
   font-size: clamp(1.05rem, 2.2vw, 1.55rem);
   letter-spacing: 0.20em;
   text-transform: uppercase;
 }
 
-/* Optional: make About/Contact not start under the strip */
+/* =========================================================
+   VIEWER (MODAL)
+========================================================= */
 
-#about {
+#viewer {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  display: grid;
+  place-items: center;
+}
+
+#viewer-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(7,7,10,0.92);
+  backdrop-filter: blur(10px);
+}
+
+#viewer-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#viewer-img {
+  max-width: min(92vw, 1200px);
+  max-height: 82vh;
+  border-radius: 14px;
+  box-shadow: 0 18px 70px rgba(0,0,0,0.7);
+}
+
+#counter {
+  margin-top: 12px;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+/* =========================================================
+   ABOUT / CONTACT (VERTICAL PAGE)
+========================================================= */
+
+#about,
+#contact {
   max-width: 760px;
-  margin-top: 120px;
+  padding: 120px 6vw 0;
+  line-height: 1.6;
+  color: var(--muted);
 }
 
 .about-lang {
@@ -290,6 +298,12 @@ main{
   margin-bottom: 1.4em;
 }
 
-body {
-  overflow-y: auto;
+#contact a {
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255,255,255,0.25);
+}
+
+#contact a:hover {
+  border-bottom-color: rgba(255,255,255,0.6);
 }
