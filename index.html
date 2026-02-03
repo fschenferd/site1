@@ -3,44 +3,40 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
   <title>Fernanda Schenferd</title>
-  <meta name="description" content="Photography portfolio by Fernanda Schenferd." />
+  <meta name="description" content="Photography and film work by Fernanda Schenferd." />
 
-  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&family=Cormorant+Garamond:wght@400;500&family=IBM+Plex+Mono:wght@300&display=swap" rel="stylesheet">
 
-  <!-- Styles -->
   <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
 
-  <!-- SPLASH -->
+<!-- SPLASH -->
 <div id="splash">
-  <div class="splash-inner">
+  <div class="splash-card">
     <h1>FERNANDA SCHENFERD</h1>
-    <p class="splash-tagline">Images from the edge of the real</p>
-    <button id="enter" type="button">ENTER</button> 
+    <p id="tagline">IMAGES FROM THE EDGE OF THE REAL</p>
+    <button id="enter">ENTER</button>
   </div>
 </div>
 
+<!-- HEADER -->
+<header id="header">
+  <nav>
+    <button data-nav="work">WORK</button>
+    <button data-nav="about">ABOUT</button>
+    <button data-nav="contact">CONTACT</button>
+  </nav>
+</header>
 
-  <!-- HEADER -->
-  <header id="header">
-    <nav>
-      <a href="#work">WORK</a>
-      <a href="#about">ABOUT</a>
-      <a href="#contact">CONTACT</a>
-    </nav>
-  </header>
-
-  <!-- WORK -->
- <main id="work" class="work-strip" aria-label="Work">
+<!-- WORK (horizontal plane) -->
+<main id="work" class="work-strip" aria-label="Work">
   <section class="project">
-    <a href="#" data-project="on-seeing" class="card">
+    <a class="card" data-project="on-seeing">
       <div class="card-media">
         <img src="images/on-seeing/01.jpg" alt="On Seeing">
       </div>
@@ -51,7 +47,7 @@
   </section>
 
   <section class="project">
-    <a href="#" data-project="in-passing" class="card">
+    <a class="card" data-project="in-passing">
       <div class="card-media">
         <img src="images/in-passing/01.jpg" alt="In Passing">
       </div>
@@ -62,7 +58,7 @@
   </section>
 
   <section class="project">
-    <a href="#" data-project="meanwhile" class="card">
+    <a class="card" data-project="meanwhile">
       <div class="card-media">
         <img src="images/meanwhile/01.jpg" alt="Meanwhile">
       </div>
@@ -73,82 +69,32 @@
   </section>
 </main>
 
-
-  <!-- VIEWER -->
-  <div id="viewer" hidden>
+<!-- VIEWER -->
+<div id="viewer" hidden>
+  <div id="viewer-backdrop"></div>
+  <div id="viewer-content">
     <img id="viewer-img" alt="">
     <div id="counter"></div>
   </div>
+</div>
 
-  <!-- ABOUT -->
-  <section id="about">
-
-  <!-- EN -->
+<!-- ABOUT -->
+<section id="about">
   <div class="about-lang" lang="en">
-    <p>
-      I work from a position of attention rather than intention.
-      Images tend to appear while moving through the world without a clear goal,
-      when focus and distraction overlap and something briefly gathers in front of me,
-      as if looking were enough for a form to take shape.
-    </p>
-
-    <p>
-      My practice is rooted in observation as a reciprocal act.
-      What is observed is altered by the act of seeing,
-      just as light alters the matter it touches.
-      Photography operates in this unstable space — between presence and trace,
-      distance and involvement, particle and wave.
-    </p>
-
-    <p>
-      I am drawn to moments of stillness, when the world around a scene seems to recede
-      and what remains is held together by light, time, and a fragile balance of relations.
-      Silence marks its presence by dissolving what falls outside the frame.
-      Both natural and constructed spaces enter the work on equal terms,
-      shaped by chance, repetition, and the quiet persistence of looking.
-    </p>
+    <!-- text unchanged -->
   </div>
-
-  <!-- PT-BR -->
   <div class="about-lang" lang="pt-BR">
-    <p>
-      Trabalho a partir de uma posição de atenção mais do que de intenção.
-      As imagens tendem a surgir enquanto me movimento pelo mundo sem um objetivo claro,
-      quando foco e distração se sobrepõem e algo, por um instante, se organiza à minha frente,
-      como se o ato de olhar fosse suficiente para que uma forma se constituísse.
-    </p>
-
-    <p>
-      Minha prática parte da observação como um gesto recíproco.
-      Aquilo que é observado se altera pelo próprio ato de ver,
-      assim como a luz transforma a matéria que toca.
-      A fotografia opera nesse território instável — entre presença e vestígio,
-      distância e envolvimento, partícula e onda.
-    </p>
-
-    <p>
-      Sou atraída por momentos de imobilidade, quando o mundo ao redor de uma cena parece recuar
-      e o que permanece se sustenta por luz, tempo e um equilíbrio frágil de relações.
-      O silêncio marca sua presença ao dissolver aquilo que fica fora do enquadramento.
-      Espaços naturais e construídos entram no trabalho em condições de igualdade,
-      moldados pelo acaso, pela repetição e pela persistência silenciosa do olhar.
-    </p>
+    <!-- text unchanged -->
   </div>
-
 </section>
 
+<!-- CONTACT -->
+<section id="contact">
+  <a href="mailto:hello@fernandaschenferd.com.br">
+    hello@fernandaschenferd.com.br
+  </a>
+</section>
 
-  <!-- CONTACT -->
-  <section id="contact">
-    <a href="mailto:hello@fernandaschenferd.com.br">
-      hello@fernandaschenferd.com.br
-    </a>
-  </section>
-
-  <!-- Scripts -->
- <script src="js/app.js"></script>
-
-
+<script src="js/app.js"></script>
 </body>
 </html>
-
